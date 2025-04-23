@@ -27,7 +27,7 @@ const MainBanner = () => {
       
           <Link
             to="/products"
-            className="hidden md:flex group items-center gap-2 bg-primary text-white font-semibold text-base py-2 px-6 rounded-md shadow-md hover:bg-primary-dull transition duration-200"
+            className="hidden md:flex group items-center gap-2 bg-primary text-white font-semibold text-base py-2 px-6 shadow-md hover:bg-primary-dull transition duration-200 rounded-3xl"
           >
             Shop Now
             <img
@@ -40,7 +40,7 @@ const MainBanner = () => {
      
           <Link
             to="/products"
-            className="flex md:hidden group items-center gap-2 bg-white text-primary font-semibold text-sm py-2 px-6 rounded-md shadow-md hover:bg-gray-100 transition duration-200"
+            className="flex md:hidden group items-center gap-2 bg-white text-primary font-semibold text-sm py-2 px-6 rounded-3xl shadow-md hover:bg-gray-100 transition duration-200"
           >
             Explore Deals
             <img

@@ -1,151 +1,93 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [signupData, setSignupData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+  const [state, setState] = React.useState("login");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  const handleLoginSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Dummy login logic
-    alert(`Logged in as: ${email}`);
-  };
-
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
-    // Dummy signup logic
-    if (signupData.password !== signupData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+    if (state === "register") {
+      // Dummy register logic
+      alert(`Account created for: ${name} (${email})`);
+    } else {
+      // Dummy login logic
+      alert(`Logged in as: ${email}`);
     }
-    alert(`Signed up as: ${signupData.name} (${signupData.email})`);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 px-4 bg-gray-50">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <div className="flex justify-center mb-8">
-          <button
-            className={`px-6 py-2 font-semibold rounded-l-md transition-all ${
-              isLogin
-                ? "bg-primary text-white"
-                : "bg-gray-200 text-primary hover:bg-primary/10"
-            }`}
-            onClick={() => setIsLogin(true)}
-          >
-            Login
-          </button>
-          <button
-            className={`px-6 py-2 font-semibold rounded-r-md transition-all ${
-              !isLogin
-                ? "bg-primary text-white"
-                : "bg-gray-200 text-primary hover:bg-primary/10"
-            }`}
-            onClick={() => setIsLogin(false)}
-          >
-            Sign Up
-          </button>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 m-auto items-start p-8 py-12 w-80 sm:w-[352px] rounded-lg shadow-xl border border-gray-200 bg-white mt-16 mb-16"
+    >
+      <p className="text-2xl font-medium m-auto">
+        <span className="text-primary">User</span> {state === "login" ? "Login" : "Sign Up"}
+      </p>
+      {state === "register" && (
+        <div className="w-full">
+          <p className="text-primary font-medium">Name</p>
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Type here"
+            className="border border-primary rounded w-full p-2 mt-1 outline-primary"
+            type="text"
+            required
+          />
         </div>
-        {isLogin ? (
-          <form onSubmit={handleLoginSubmit} className="flex flex-col gap-4">
-            <input
-              type="email"
-              className="border border-primary rounded-md px-4 py-2 outline-none"
-              placeholder="Email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              className="border border-primary rounded-md px-4 py-2 outline-none"
-              placeholder="Password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
-            <button
-              type="submit"
-              className="bg-primary hover:bg-primary-dull text-white font-semibold py-2 rounded-md transition"
-            >
-              Login
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleSignupSubmit} className="flex flex-col gap-4">
-            <input
-              type="text"
-              className="border border-primary rounded-md px-4 py-2 outline-none"
-              placeholder="Name"
-              value={signupData.name}
-              onChange={e => setSignupData({ ...signupData, name: e.target.value })}
-              required
-            />
-            <input
-              type="email"
-              className="border border-primary rounded-md px-4 py-2 outline-none"
-              placeholder="Email"
-              value={signupData.email}
-              onChange={e => setSignupData({ ...signupData, email: e.target.value })}
-              required
-            />
-            <input
-              type="password"
-              className="border border-primary rounded-md px-4 py-2 outline-none"
-              placeholder="Password"
-              value={signupData.password}
-              onChange={e => setSignupData({ ...signupData, password: e.target.value })}
-              required
-            />
-            <input
-              type="password"
-              className="border border-primary rounded-md px-4 py-2 outline-none"
-              placeholder="Confirm Password"
-              value={signupData.confirmPassword}
-              onChange={e => setSignupData({ ...signupData, confirmPassword: e.target.value })}
-              required
-            />
-            <button
-              type="submit"
-              className="bg-primary hover:bg-primary-dull text-white font-semibold py-2 rounded-md transition"
-            >
-              Sign Up
-            </button>
-          </form>
-        )}
-        <div className="mt-4 text-center text-sm text-gray-500">
-          {isLogin ? (
-            <>
-              Don't have an account?{" "}
-              <button
-                className="text-primary underline"
-                onClick={() => setIsLogin(false)}
-                type="button"
-              >
-                Sign up
-              </button>
-            </>
-          ) : (
-            <>
-              Already have an account?{" "}
-              <button
-                className="text-primary underline"
-                onClick={() => setIsLogin(true)}
-                type="button"
-              >
-                Login
-              </button>
-            </>
-          )}
-        </div>
+      )}
+      <div className="w-full">
+        <p className="text-primary font-medium">Email</p>
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="Type here"
+          className="border border-primary rounded w-full p-2 mt-1 outline-primary"
+          type="email"
+          required
+        />
       </div>
-    </div>
+      <div className="w-full">
+        <p className="text-primary font-medium">Password</p>
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          placeholder="Type here"
+          className="border border-primary rounded w-full p-2 mt-1 outline-primary"
+          type="password"
+          required
+        />
+      </div>
+      {state === "register" ? (
+        <p className="text-sm">
+          Already have account?{" "}
+          <span
+            onClick={() => setState("login")}
+            className="text-primary cursor-pointer underline"
+          >
+            click here
+          </span>
+        </p>
+      ) : (
+        <p className="text-sm">
+          Create an account?{" "}
+          <span
+            onClick={() => setState("register")}
+            className="text-primary cursor-pointer underline"
+          >
+            click here
+          </span>
+        </p>
+      )}
+      <button
+        type="submit"
+        className="bg-primary hover:bg-primary-dull transition-all text-white w-full py-2 rounded-md cursor-pointer font-semibold"
+      >
+        {state === "register" ? "Create Account" : "Login"}
+      </button>
+    </form>
   );
 };
 
